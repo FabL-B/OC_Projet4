@@ -1,0 +1,2 @@
+class HomeMenuView:
+    pass
