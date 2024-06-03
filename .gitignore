@@ -5,4 +5,9 @@
 # Ignore cache folders
 __pycache__
 
-/test.py
+
+# Ignore files
+/players.json
+/tournaments.json
+
+/test2.py
