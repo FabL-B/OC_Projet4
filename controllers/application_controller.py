@@ -1,6 +1,6 @@
 from typing import Any
 
-from ..views.home_menu_view import HomeMenuView
+from ..views.menu_view import HomeMenuView
 
 
 class ApplicationController:

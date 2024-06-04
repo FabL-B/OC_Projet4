@@ -8,8 +8,12 @@ from views.tournament_view import TournamentView
 class TournamentManager:
     """Tournament manager."""
     
-    def create_new_tournament():
+    def __init__(self):
+        pass
+    
+    def create_new_tournament(self):
         """Add a new tournament in data base."""
+        # Create the tournaments general infos.
         name = TournamentView.get_tournament_name()
         location = TournamentView.get_tournament_location()
         start_date = TournamentView.get_tournament_start_date()
@@ -17,7 +21,7 @@ class TournamentManager:
         numbers_of_rounds = TournamentView.get_number_of_rounds()
         actual_round = 0
         rounds_list = []
-        players_list = []
+        players_list = PlayerManager().create_players_list()
         general_remarks = TournamentView.get_general_remarks()
         
         new_tournament = Tournament(name,
@@ -30,49 +34,47 @@ class TournamentManager:
                                     players_list,
                                     general_remarks
                                     )
-        
-        #Add the new tournament to the data base
-        tournament_dict = new_tournament.to_dict_tournament()
-
-        json_file_path = "tournaments.json"
-        if os.path.exists(json_file_path):
-            with open(json_file_path, 'r') as file:
-                tournaments = json.load(file)
-        else:
-            tournaments = []
-        tournaments.append(tournament_dict)
-
-        with open(json_file_path, 'w') as file:
-            json.dump(tournaments, file, indent=4)
-
+        self.save_tournament(new_tournament)
         return new_tournament
-
-    def checkin_players(self):
-        """Add new player in tournament players list"""
-        new_player = PlayerManager.create_new_player()
-        Tournament.add_player(new_player)
-    
-    def save_tournament():
-        """Save the current state of the tournament to the database."""
-        tournament_dict = Tournament.to_dict_tournament()
         
+    
+    def save_tournament(self, tournament):
+        """Save the current state of the tournament to the database."""
         json_file_path = "tournaments.json"
-        if os.path.exists(json_file_path):
-            with open(json_file_path, 'r') as file:
-                tournaments = json.load(file)
+        
+        # Convert each player in the players_list to a dictionary
+        for index, player in enumerate(tournament.players_list):
+            tournament.players_list[index] = player.to_dict_player()
+        
+        # Convert the tournament to a dictionary    
+        tournament = tournament.to_dict_tournament()
+        
+        # Check if the file exists and is not empty
+        if os.path.exists(json_file_path) and os.path.getsize(json_file_path) > 0:
+            try:
+                with open(json_file_path, "r") as file:
+                    tournaments = json.load(file)
+            except json.JSONDecodeError:
+                tournaments = []
         else:
             tournaments = []
 
         # Check if the tournament already exists
+        tournament_exists = False
         for index, existing_tournament in enumerate(tournaments):
-            if existing_tournament['name'] == Tournament.name :
-                tournaments[index] = tournament_dict
+            if existing_tournament["name"] == tournament["name"]:
+                tournaments[index] = tournament
+                tournament_exists = True
                 break
         
-        # Add or update the tournament
-        tournaments.append(tournament_dict)
+        # Add the tournament if it doesn't already exist
+        if not tournament_exists:
+            tournaments.append(tournament)
 
-        with open(json_file_path, 'w') as file:
+        temp_file_path = f"{json_file_path}.tmp"
+        with open(temp_file_path, "w") as file:
             json.dump(tournaments, file, indent=4)
         
-        print(f"Tournament {Tournament.name} successfully saved.")
+        os.replace(temp_file_path, json_file_path)
+        
+        print(f"Tournament '{tournament['name']}' successfully saved.")

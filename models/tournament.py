@@ -17,9 +17,6 @@ class Tournament:
         self.players_list = players_list if players_list is not None else []
         self.general_remarks = general_remarks
 
-    def set_players_list():
-            pass
-
     def to_dict_tournament(self):
         """Set tournament data in dictionnary."""
         return {
@@ -34,15 +31,4 @@ class Tournament:
             "general remarks": self.general_remarks
         }
 
-    def add_player(self, player):
-        """Add a player to the tournament."""
-        self.players_list.append(player)
-
-    def remove_player(self, player):
-        """Remove a player from the tournament."""
-        self.players_list.remove(player)
-
-    def get_players(self):
-        """Return the list of players."""
-        return self.players_list
     

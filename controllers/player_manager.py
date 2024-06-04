@@ -7,7 +7,7 @@ from views.player_view import PlayerView
 class PlayerManager:
     """Player manager."""
     
-    def create_new_player():
+    def create_new_player(self):
         """Add a new player."""
         name = PlayerView.get_player_name()
         surname = PlayerView.get_player_surname()
@@ -21,45 +21,55 @@ class PlayerManager:
                             chess_id,
                             score_tournament)
         
+        self.save_player_in_db(new_player)
         
-        player_dict = new_player.to_dict_player()
-        
-        json_file_path = "players.json"
-        if os.path.exists(json_file_path):
-            with open(json_file_path, 'r') as file:
-                players = json.load(file)
-        else:
-            players = []
-        players.append(player_dict)
-
-        with open(json_file_path, 'w') as file:
-            json.dump(players, file, indent=4)
-            
         return new_player
 
-
-    def save_player_in_db():
-        """Save the player object to the database (JSON file)."""
-        player_dict = Player.to_dict_player()
-        
+    def save_player_in_db(self, player):
+        """Save the player in the database."""
         json_file_path = "players.json"
         if os.path.exists(json_file_path):
-            with open(json_file_path, 'r') as file:
-                players = json.load(file)
+            with open(json_file_path, "r") as file:
+                players_data = json.load(file)
         else:
-            players = []
-        
-        # Check if the player already exists
-        for existing_player in players:
-            if existing_player['chess_id'] == Player.chess_id:
-                print(f"Player with chess_id {Player.chess_id} already exists.")
-                return None
-            else:
-                # Add new player
-                players.append(player_dict)
-                with open(json_file_path, 'w') as file:
-                    json.dump(players, file, indent=4)
-                print(f"Player {Player.chess_id} added in data base.")
+            players_data = []
 
-    def modify_player():
-        pass
+        # Convert the player to a dictionary  
+        player = player.to_dict_player()
+
+        # Check if the player already exists
+        player_in_db = False
+        for index, existing_player in enumerate(players_data):
+            # If player exist, update it.
+            if existing_player["chess_id"] == player["chess_id"]:
+                players_data[index] = player
+                player_in_db = True
+                break
+        
+        # If not in data base add it.
+        if not player_in_db:
+            players_data.append(player)
+        
+        
+        with open(json_file_path, "w") as file:
+            json.dump(players_data, file, indent=4)
+        print(f"Player {player["name"]} updated in data base.")
+
+    def create_players_list(self):
+        """Create a list of players for tournament."""
+        players_list = []
+
+        while True:
+            # Add a player
+            new_player = self.create_new_player()
+            players_list.append(new_player)
+            # Ask if more player to add
+            user_request = PlayerView.add_player_request()
+            if user_request == "N":
+                # Player lists needs to be paire
+                if len(players_list) % 2 != 0:
+                    print("The number of players is odd you need one more.")
+                else:
+                    break
+
+        return players_list
