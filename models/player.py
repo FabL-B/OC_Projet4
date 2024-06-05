@@ -9,7 +9,7 @@ class Player:
         self.surname = surname
         self.chess_id = chess_id
         self.birth_date = birth_date
-        self.score_tournament = 0
+        self.score_tournament = score_tournament
 
     def to_dict_player(self):
         """Set player data in dictionnary."""

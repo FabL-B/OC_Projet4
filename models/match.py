@@ -1,11 +1,11 @@
-#import
-
 class Match:
-    """A class that defines match."""
+    """A class to define a match."""
 
-    def __init__(self, player1, player2, player1_score, player2_score):
-        """Initialize a match."""
-        self.player1 = player1
-        self.player2 = player2
-        self.player1_score = player1_score
-        self.player2_score = player2_score
+    def __init__(self, player1, player2):
+        """Initialize a match with two players."""
+        self.players = [(player1, 0), (player2, 0)]
+    
+    def set_scores(self, score1, score2):
+        """Set the scores for both players."""
+        self.players[0] = (self.players[0][0], score1)
+        self.players[1] = (self.players[1][0], score2)
