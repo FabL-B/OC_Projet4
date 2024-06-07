@@ -9,3 +9,6 @@ class Match:
         """Set the scores for both players."""
         self.players[0] = (self.players[0][0], score1)
         self.players[1] = (self.players[1][0], score2)
+        
+    def to_tuples_match():
+        pass

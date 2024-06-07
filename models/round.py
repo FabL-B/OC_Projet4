@@ -17,3 +17,12 @@ class Round:
     def end_round(self):
         """End the round by setting the end date and time."""
         self.end_date_time = ""
+
+    def round_to_dict(self, round_instance):
+        """Convert a round instance to a dictionary."""
+        return {
+            "round_number": round_instance.round_number,
+            "start_date_time": round_instance.start_date_time,
+            "end_date_time": round_instance.end_date_time,
+            "matchs_list": round_instance.matchs_list
+        }

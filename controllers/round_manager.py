@@ -14,8 +14,10 @@ class RoundManager:
         round_number = tournament.actual_round
         new_round = Round(round_number)
         
+        # For first round simply shuffle players list
         if round_number == 1:
             random.shuffle(tournament.players_list)
+        # For next rounds sort players in the list by their tournament score
         else:
             random.shuffle(tournament.players_list)
         

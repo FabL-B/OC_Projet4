@@ -25,5 +25,14 @@ class TournamentView:
         """Ask user to enter the player name"""
         return input("Enter any general remarks for the tournament: ")
     
-    def ask_add_players_list():
+    def ask_add_players_list(): # ??? A VERIFIER
         return input("To add a new player press enter, else press 'q'")
+    
+    def load_tournament_view(tournaments):
+        """Display a list of tournaments from data base."""
+        print("Saved tournaments list :\n")
+        for tournament in tournaments:
+            print("-" + tournament["name"])
+        print()
+        user_entry = input("Enter the name of the tournament to load : ")
+        return user_entry

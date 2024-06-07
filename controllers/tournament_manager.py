@@ -70,11 +70,14 @@ class TournamentManager:
     def save_tournament(self, tournament):
         """Save the current state of the tournament to the database."""
         json_file_path = "tournaments.json"
-        
-        """# Convert each player in the players_list to a dictionary
+
+        # Convert each player in the players_list to a dictionary
         for index, player in enumerate(tournament.players_list):
             tournament.players_list[index] = player.to_dict_player()
-        # Convert the tournament to a dictionary    """
+        # Convert each player in the players_list to a dictionary
+        for index, round in enumerate(tournament.rounds_list):
+            tournament.rounds_list[index] = round.to_dict_player()
+        # Convert the tournament to a dictionary    
         tournament = tournament.to_dict_tournament()
         
         # Check if the file exists
@@ -104,6 +107,13 @@ class TournamentManager:
         print(f"Tournament '{tournament['name']}' successfully saved.")
 
     def load_tournament():
-        #load depuis json
-        # return tournament
-        pass
+        json_file_path = "tournaments.json"
+        
+        with open(json_file_path, "r") as file:
+            tournaments = json.load(file)
+            user_entry = TournamentView.load_tournament_view(tournaments)
+            for tournament in tournaments:
+                if user_entry == tournament["name"]:
+                    loaded_tournament = tournament
+        return loaded_tournament
+        
