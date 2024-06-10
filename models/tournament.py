@@ -19,7 +19,6 @@ class Tournament:
 
     def to_dict_tournament(self):
         """Set tournament data in dictionnary."""
-        players_list = 
         return {
             "name": self.name,
             "location": self.location,

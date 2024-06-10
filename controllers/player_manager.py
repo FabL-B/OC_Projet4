@@ -55,6 +55,20 @@ class PlayerManager:
             json.dump(players_data, file, indent=4)
         print(f"Player {player["name"]} updated in data base.")
 
+    def load_players_from_db(self):
+        """Load players from the database."""
+        json_file_path = "players.json"
+        players_list = []
+
+        if os.path.exists(json_file_path):
+            with open(json_file_path, "r") as file:
+                players_data = json.load(file)
+                for player_data in players_data:
+                    player = Player.from_dict_player(player_data)
+                    players_list.append(player)
+        
+        return players_list
+
     def create_players_list(self):
         """Create a list of players for tournament."""
         players_list = []

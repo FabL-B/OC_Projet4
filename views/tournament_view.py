@@ -18,8 +18,12 @@ class TournamentView:
 
     def get_number_of_rounds():
         """Ask user to enter the player name"""
-        rounds = input("Enter the number of rounds: ")
-        return int(rounds)
+        while True:
+            rounds = input("Enter the number of rounds: ")
+            if rounds.isdigit():
+                return int(rounds)
+            else:
+                print("Invalid input. Please enter a valid number.")
 
     def get_general_remarks():
         """Ask user to enter the player name"""

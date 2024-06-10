@@ -52,6 +52,6 @@ class RoundManager:
             print(f"Enter score for {player2.name} {player2.surname} (0, 0.5, 1): ")
             score2 = float(input())
             match.set_scores(score1, score2)
-            player1.score_tournament += score1
+            player1.score_tournament += score1# a mettre dans le tournament manager
             player2.score_tournament += score2
 
