@@ -4,22 +4,22 @@ from models.round import Round
 from models.match import Match
 
 class RoundManager:
-    """round manager."""
+    """Round manager."""
     
     def __init__(self):
         pass
     
     def create_new_round(self, tournament):
         """Create a new round."""
-        round_number = tournament.actual_round
+        round_number = tournament.actual_round + 1
         new_round = Round(round_number)
-        
-        # For first round simply shuffle players list
+
+        # For first round, shuffle players list
         if round_number == 1:
             random.shuffle(tournament.players_list)
-        # For next rounds sort players in the list by their tournament score
+        # For next rounds, sort players by their tournament score
         else:
-            random.shuffle(tournament.players_list)
+            tournament.players_list.sort(key=lambda player: player.score_tournament, reverse=True)
         
         matchs_list = self.create_match_list(tournament.players_list)
         new_round.matchs_list = matchs_list
@@ -27,14 +27,9 @@ class RoundManager:
         # Add the new round to the tournament
         tournament.rounds_list.append(new_round)
         # Increment the round number for the tournament
-        tournament.actual_round += 1
+        tournament.actual_round = round_number
         return new_round
-        # rentrer résultats des matchs
-        # mettre à jour score des joueurs
-        # save player data
-        # ajouter round à la liste de round du tournoi
-        # save tournament data
-        
+    
     def create_match_list(self, players_list):
         """Create matches list."""
         matchs_list = []
@@ -52,6 +47,5 @@ class RoundManager:
             print(f"Enter score for {player2.name} {player2.surname} (0, 0.5, 1): ")
             score2 = float(input())
             match.set_scores(score1, score2)
-            player1.score_tournament += score1# a mettre dans le tournament manager
+            player1.score_tournament += score1
             player2.score_tournament += score2
-

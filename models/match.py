@@ -10,5 +10,6 @@ class Match:
         self.players[0] = (self.players[0][0], score1)
         self.players[1] = (self.players[1][0], score2)
         
-    def to_tuples_match():
-        pass
+    def to_tuples_match(self):
+        """Convert the match to a list of tuples."""
+        return self.players

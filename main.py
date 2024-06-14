@@ -1,6 +1,9 @@
-from models.player_manager import PlayerManager
-from controllers.tournament_controller import TournamentMenuController
+from controllers.menu_controller import MenuController
+
+def main():
+
+    menu_controller = MenuController()
+    menu_controller.display_main_menu()
 
 if __name__ == "__main__":
-    
-    TournamentMenuController.new_tournament()
+    main()
