@@ -1,3 +1,6 @@
+from rich.console import Console
+from rich.table import Table
+from rich.box import HEAVY_HEAD
 
 class TournamentView:
 
@@ -40,10 +43,49 @@ class TournamentView:
     def ask_add_players_list(): # ??? A VERIFIER
         return input("To add a new player press enter, else press 'q'")
     
-    @staticmethod
-    def select_tournament_view(tournaments):
+    
+    def select_tournament_view(tournaments_list):
         """Ask user to select a tournaments from a list"""
-        for idx, tournament in enumerate(tournaments, 1):
-            print(f"{idx}. {tournament['name']}")
-        choice = int(input("Choose a tournament to play: ")) - 1
-        return tournaments[choice]
+        while True:
+            try:
+                choice = int(input(
+                    "Enter the number of the tournament to play: ")) - 1
+                if 0 <= choice < len(tournaments_list):
+                    break
+                else:
+                    print(
+                    "Invalid choice. Please choose a number within the range.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+        print()
+        print(f"You selected {tournaments_list[choice]["name"]}")
+        return tournaments_list[choice]
+
+    def display_tournaments(tournaments_list):
+        console = Console()
+        table = Table(
+            title="Tournaments list from database",
+            style='green',
+            box=HEAVY_HEAD
+        )
+        table.add_column("N°", style="blue", justify="left")
+        table.add_column("Name", style="blue", justify="left")
+        table.add_column("Location", style="blue", justify="left")
+        table.add_column("Start date", style="blue", justify="left")
+        table.add_column("End date", style="blue", justify="left")
+        table.add_column("Numbers of rounds", style="blue", justify="left")
+        table.add_column("Actual round", style="blue", justify="left")
+        table.add_column("General remarks", style="blue", justify="left")
+        
+        for idx, tournament in enumerate(tournaments_list, start=1):
+            table.add_row(
+                str(idx),
+                tournament["name"],
+                tournament["location"],
+                tournament["start_date"],
+                tournament["end_date"],
+                str(tournament["numbers of rounds"]),
+                str(tournament["actual round"]),
+                tournament["general remarks"]
+            )
+        console.print(table)

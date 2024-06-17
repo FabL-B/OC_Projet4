@@ -13,11 +13,14 @@ class TournamentManager:
         self.tournament_view = TournamentView()
 
     def select_tournament_from_list():
-        tournaments = Tournament.load_tournaments_from_db()
-        if not tournaments:
+        tournaments_list = Tournament.load_tournaments_from_db()
+        if not tournaments_list:
             print("No tournaments available.")
             return
-        selected_tournament = TournamentView.select_tournament_view(tournaments)
+        # Display the tournaments list
+        TournamentView.display_tournaments(tournaments_list)
+        # Select the tournament from list with index
+        selected_tournament = TournamentView.select_tournament_view(tournaments_list)
 
         # Instantiate player list and round list from dictionnary
         players_list = []

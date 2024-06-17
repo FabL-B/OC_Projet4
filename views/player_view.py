@@ -1,5 +1,6 @@
 from rich.console import Console
 from rich.table import Table
+from rich.box import HEAVY_HEAD
 
 class PlayerView:  
 
@@ -43,18 +44,22 @@ class PlayerView:
         console = Console()
         table = Table(
             title="Players list from database",
-            style='black on grey66'
+            style="green",
+            box=HEAVY_HEAD
         )
+        table.add_column("N°", style="blue", justify="left")
         table.add_column("Name", style="blue", justify="left")
         table.add_column("Surname", style="blue", justify="left")
         table.add_column("Chess ID", style="blue", justify="left")
         table.add_column("Birth date", style="blue", justify="left")
         
-        for player in players_list:
+        for idx, player in enumerate(players_list, start=1):
             table.add_row(
+                str(idx),
                 player.name,
                 player.surname,
                 player.chess_id,
                 player.birth_date
             )
         console.print(table)
+        

@@ -4,6 +4,8 @@ from controllers.tournament_manager import TournamentManager
 from controllers.player_manager import PlayerManager
 
 from views.menu_view import MenuView
+from views.tournament_view import TournamentView
+from views.player_view import PlayerView
 
 class MenuController:
     """Controller for handling menu interactions."""
@@ -43,8 +45,8 @@ class MenuController:
 
             if choice == "1":
                 tournaments = Tournament.load_tournaments_from_db()
-                for tournament in tournaments:
-                    print(tournament) #faire un display tournament view
+                TournamentView.display_tournaments(tournaments)
+                
             elif choice == "2":
                 self.tournament_manager.create_new_tournament()
             elif choice == "3":
@@ -66,12 +68,14 @@ class MenuController:
             choice = input("Enter your choice: ")
 
             if choice == "1":
-                players = Player.load_players_from_db()
-                for player in players:
-                    print(player)  #faire un display player view
+                players_list = Player.load_players_from_db()
+                PlayerView.display_players(players_list)
             elif choice == "2":
                 PlayerManager.create_new_player()
             elif choice == "3":
                 self.display_main_menu()
+            elif choice == "5":
+                test_list = self.player_manager.create_players_list()
+                PlayerView.display_players(test_list)
             else:
                 print("Invalid choice, please try again.")
