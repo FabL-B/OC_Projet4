@@ -10,7 +10,6 @@ class TournamentManager:
     
     def __init__(self):
         self.player_manager = PlayerManager()
-        self.round_manager = RoundManager()
         self.tournament_view = TournamentView()
 
     def select_tournament_from_list():
@@ -40,23 +39,32 @@ class TournamentManager:
     
     def play_tournament(selected_tournament):
         actual_round = selected_tournament.actual_round
+        if actual_round == 0:
+            actual_round =+ 1
         print("round : ", actual_round)
         for i in range(actual_round, selected_tournament.numbers_of_rounds + 1):
+            round_manager = RoundManager()
+            new_round = round_manager.create_new_round(selected_tournament)
             print(f"Starting Round {i}")
-            new_round = RoundManager.create_new_round(selected_tournament)
             print(f"Round {i} matches:")
             for match in new_round.matchs_list:
                 player1, player2 = match.players[0][0], match.players[1][0]
                 print(f"{player1.name} {player1.surname} vs {player2.name} {player2.surname}")
                 
-                RoundManager.enter_matchs_results(new_round.matchs_list)
+                round_manager.enter_matchs_results(new_round.matchs_list)
                 new_round.end_round()
                 print(f"Round {i} completed.")
-                Tournament.save_tournament(selected_tournament)
-                
             print(f"Round {i} completed.")
             actual_round += 1
             selected_tournament.actual_round = actual_round
+            if actual_round == selected_tournament.numbers_of_rounds + 1:
+                print(f"Tournament {selected_tournament.name} is over")
+                Tournament.save_tournament(selected_tournament)
+            print("play new round or exit?")
+            answer = input().capitalize
+            if answer == "N":
+                Tournament.save_tournament(selected_tournament)
+                break
 
         print("Tournament completed.")
 
