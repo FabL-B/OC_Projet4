@@ -1,3 +1,5 @@
+from rich.console import Console
+from rich.table import Table
 
 class PlayerView:  
 
@@ -37,3 +39,22 @@ class PlayerView:
         
         return user_request
 
+    def display_players(players_list):
+        console = Console()
+        table = Table(
+            title="Players list from database",
+            style='black on grey66'
+        )
+        table.add_column("Name", style="blue", justify="left")
+        table.add_column("Surname", style="blue", justify="left")
+        table.add_column("Chess ID", style="blue", justify="left")
+        table.add_column("Birth date", style="blue", justify="left")
+        
+        for player in players_list:
+            table.add_row(
+                player.name,
+                player.surname,
+                player.chess_id,
+                player.birth_date
+            )
+        console.print(table)
