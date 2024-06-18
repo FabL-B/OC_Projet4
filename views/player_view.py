@@ -47,11 +47,11 @@ class PlayerView:
             style="green",
             box=HEAVY_HEAD
         )
-        table.add_column("N°", style="blue", justify="left")
-        table.add_column("Name", style="blue", justify="left")
-        table.add_column("Surname", style="blue", justify="left")
-        table.add_column("Chess ID", style="blue", justify="left")
-        table.add_column("Birth date", style="blue", justify="left")
+        table.add_column("N°", style="cyan", justify="left")
+        table.add_column("Name", style="cyan", justify="left")
+        table.add_column("Surname", style="cyan", justify="left")
+        table.add_column("Chess ID", style="cyan", justify="left")
+        table.add_column("Birth date", style="cyan", justify="left")
         
         for idx, player in enumerate(players_list, start=1):
             table.add_row(

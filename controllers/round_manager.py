@@ -20,14 +20,7 @@ class RoundManager:
         # For next rounds, sort players by their tournament score
         else:
             tournament.players_list.sort(key=lambda player: player.score_tournament, reverse=True)
-        
-        matchs_list = self.create_match_list(tournament.players_list)
-        new_round.matchs_list = matchs_list
-            
-        # Add the new round to the tournament
-        tournament.rounds_list.append(new_round)
-        # Increment the round number for the tournament
-        tournament.actual_round = round_number
+        new_round.matchs_list = self.create_match_list(tournament.players_list)
         return new_round
     
     def create_match_list(self, players_list):
@@ -38,14 +31,13 @@ class RoundManager:
             matchs_list.append(match)
         return matchs_list
 
-    def enter_matchs_results(self, matchs_list):
+    def enter_match_result(self, match):
         """Enter scores for each match manually."""
-        for match in matchs_list:
-            player1, player2 = match.players[0][0], match.players[1][0]
-            print(f"Enter score for {player1.name} {player1.surname} (0, 0.5, 1): ")
-            score1 = float(input())
-            print(f"Enter score for {player2.name} {player2.surname} (0, 0.5, 1): ")
-            score2 = float(input())
-            match.set_scores(score1, score2)
-            player1.score_tournament += score1
-            player2.score_tournament += score2
+        player1, player2 = match.players[0][0], match.players[1][0]
+        print(f"Enter score for {player1.name} {player1.surname} (0, 0.5, 1): ")
+        score1 = float(input())
+        print(f"Enter score for {player2.name} {player2.surname} (0, 0.5, 1): ")
+        score2 = float(input())
+        match.set_scores(score1, score2)
+        player1.score_tournament += score1
+        player2.score_tournament += score2

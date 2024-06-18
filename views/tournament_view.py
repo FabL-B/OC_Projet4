@@ -68,14 +68,14 @@ class TournamentView:
             style='green',
             box=HEAVY_HEAD
         )
-        table.add_column("N°", style="blue", justify="left")
-        table.add_column("Name", style="blue", justify="left")
-        table.add_column("Location", style="blue", justify="left")
-        table.add_column("Start date", style="blue", justify="left")
-        table.add_column("End date", style="blue", justify="left")
-        table.add_column("Numbers of rounds", style="blue", justify="left")
-        table.add_column("Actual round", style="blue", justify="left")
-        table.add_column("General remarks", style="blue", justify="left")
+        table.add_column("N°", style="cyan", justify="left")
+        table.add_column("Name", style="cyan", justify="left")
+        table.add_column("Location", style="cyan", justify="left")
+        table.add_column("Start date", style="cyan", justify="left")
+        table.add_column("End date", style="cyan", justify="left")
+        table.add_column("Numbers of rounds", style="cyan", justify="left")
+        table.add_column("Actual round", style="cyan", justify="left")
+        table.add_column("General remarks", style="cyan", justify="left")
         
         for idx, tournament in enumerate(tournaments_list, start=1):
             table.add_row(
