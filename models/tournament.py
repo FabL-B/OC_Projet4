@@ -1,6 +1,9 @@
 import os
 import json
 
+from models.player import Player
+from models.round import Round
+
 class Tournament:
     """A class that defines tournament."""
 
@@ -20,31 +23,50 @@ class Tournament:
 
     def to_dict_tournament(self):
         """Set tournament data in dictionnary."""
+        
+        rounds_as_dicts = [round.to_dict_round() 
+            for round in self.rounds_list
+            ]
+        players_as_dicts = [player.to_dict_player() 
+            for player in self.players_list
+            ]
+        
         return {
             "name": self.name,
             "location": self.location,
             "start_date": self.start_date,
             "end_date": self.end_date,
             "numbers of rounds": self.numbers_of_rounds,
-            "actual round": self.actual_round,
-            "rounds list": self.rounds_list,
-            "players_list": self.players_list,
+            "actual_round": self.actual_round,
+            "rounds_list": rounds_as_dicts,
+            "players_list": players_as_dicts,
             "general remarks": self.general_remarks
         }
 
     @staticmethod
     def from_dict_tournament(tournament_dict):
         """Instantiate a tournament from a dictionnary."""
-        # (rounds list and players list needs to be instantiated too)
+        # Instantiate player list from dictionary
+        players_list = [
+            Player.from_dict_player(player_dict) 
+            for player_dict in tournament_dict["players_list"]
+        ]
+
+        # Instantiate round list from dictionary
+        rounds_list = [
+            Round.from_dict_round(round_dict)
+            for round_dict in tournament_dict["rounds_list"]
+        ]
+
         return Tournament(
             name=tournament_dict["name"],
             location=tournament_dict["location"],
             start_date=tournament_dict["start_date"],
             end_date=tournament_dict["end_date"],
             numbers_of_rounds=tournament_dict["numbers of rounds"],
-            actual_round=tournament_dict["actual round"],
-            rounds_list=tournament_dict["rounds list"],
-            players_list=tournament_dict["players_list"],
+            actual_round=tournament_dict["actual_round"],
+            rounds_list=rounds_list,
+            players_list=players_list,
             general_remarks=tournament_dict["general remarks"]
         )
     @staticmethod
@@ -52,12 +74,6 @@ class Tournament:
         """Save the current state of the tournament to the database."""
         json_file_path = "tournaments.json"
 
-        # Convert each player in the players_list to a dictionary
-        for index, player in enumerate(tournament.players_list):
-            tournament.players_list[index] = player.to_dict_player()
-        # Convert each player in the players_list to a dictionary
-        for index, round in enumerate(tournament.rounds_list):
-            tournament.rounds_list[index] = round.to_dict_round()
         # Convert the tournament to a dictionary    
         tournament = tournament.to_dict_tournament()
         

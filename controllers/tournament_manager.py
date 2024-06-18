@@ -1,9 +1,8 @@
 from models.tournament import Tournament
-from models.player import Player
-from models.round import Round
 from controllers.round_manager import RoundManager
 from controllers.player_manager import PlayerManager
 from views.tournament_view import TournamentView
+
 
 class TournamentManager:
     """Tournament manager."""
@@ -18,26 +17,11 @@ class TournamentManager:
             print("No tournaments available.")
             return
         # Display the tournaments list
-        TournamentView.display_tournaments(tournaments_list)
+        TournamentView.display_tournaments_list(tournaments_list)
         # Select the tournament from list with index
         selected_tournament = TournamentView.select_tournament_view(tournaments_list)
-
-        # Instantiate player list and round list from dictionnary
-        players_list = []
-        for player_dict in selected_tournament["players_list"]:
-            player = Player.from_dict_player(player_dict)
-            players_list.append(player)
-        rounds_list = []
-        for round_dict in selected_tournament["rounds list"]:
-            round_instance = Round.from_dict_round(round_dict)
-            rounds_list.append(round_instance)
-        
         # Instantiate the selected tournament    
-        selected_tournament = Tournament.from_dict_tournament({
-                **selected_tournament,
-                "players_list": players_list,
-                "rounds_list": rounds_list
-            })
+        selected_tournament = Tournament.from_dict_tournament()
         return selected_tournament
     
     def play_tournament(selected_tournament):
@@ -47,8 +31,7 @@ class TournamentManager:
             round_manager = RoundManager()
             new_round = round_manager.create_new_round(selected_tournament)
             print(f"Starting Round {i}")
-            print(f"Round {i} matches:")
-            for match in new_round.matchs_list:
+            for match in new_round.matches_list:
                 round_manager.enter_match_result(match)
             new_round.end_round()
             print(f"Round {i} completed.")
@@ -57,7 +40,6 @@ class TournamentManager:
 
             if selected_tournament.actual_round == selected_tournament.numbers_of_rounds + 1:
                 print(f"Tournament {selected_tournament.name} is over")
-                Tournament.save_tournament(selected_tournament)
                 return
             
             print("Play new round or exit? (P to play, N to exit)")

@@ -45,7 +45,7 @@ class MenuController:
 
             if choice == "1":
                 tournaments = Tournament.load_tournaments_from_db()
-                TournamentView.display_tournaments(tournaments)
+                TournamentView.display_tournaments_list(tournaments)
                 
             elif choice == "2":
                 self.tournament_manager.create_new_tournament()

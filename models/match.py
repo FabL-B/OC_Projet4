@@ -1,3 +1,5 @@
+from models.player import Player
+
 class Match:
     """A class to define a match."""
 
@@ -12,4 +14,19 @@ class Match:
         
     def to_tuples_match(self):
         """Convert the match to a list of tuples."""
-        return self.players
+        match = []
+        for player, score in self.players:
+            player_dict = player.to_dict_player()
+            match.append((player_dict, score))
+        return match
+    @staticmethod
+    def from_tuples_match(tuples_list):
+        """Convert a list of tuples back into a Match object."""
+        player1_dict, score1 = tuples_list[0]
+        player2_dict, score2 = tuples_list[1]
+        player1 = Player.from_dict_player(player1_dict)
+        player2 = Player.from_dict_player(player2_dict)
+        
+        match = Match(player1, player2)
+        match.set_scores(score1, score2)
+        return match

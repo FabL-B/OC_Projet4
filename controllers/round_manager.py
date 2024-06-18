@@ -2,12 +2,13 @@ import random
 
 from models.round import Round
 from models.match import Match
+from views.round_view import RoundView
 
 class RoundManager:
     """Round manager."""
     
     def __init__(self):
-        pass
+        self.round_view = RoundView()
     
     def create_new_round(self, tournament):
         """Create a new round."""
@@ -20,24 +21,25 @@ class RoundManager:
         # For next rounds, sort players by their tournament score
         else:
             tournament.players_list.sort(key=lambda player: player.score_tournament, reverse=True)
-        new_round.matchs_list = self.create_match_list(tournament.players_list)
+        new_round.matches_list = self.create_match_list(tournament.players_list)
         return new_round
     
     def create_match_list(self, players_list):
         """Create matches list."""
-        matchs_list = []
+        matches_list = []
         for i in range(0, len(players_list), 2):
             match = Match(players_list[i], players_list[i+1])
-            matchs_list.append(match)
-        return matchs_list
+            matches_list.append(match)
+        return matches_list
 
     def enter_match_result(self, match):
         """Enter scores for each match manually."""
+        RoundView.match_view(match)
         player1, player2 = match.players[0][0], match.players[1][0]
-        print(f"Enter score for {player1.name} {player1.surname} (0, 0.5, 1): ")
-        score1 = float(input())
-        print(f"Enter score for {player2.name} {player2.surname} (0, 0.5, 1): ")
-        score2 = float(input())
+        score1, score2 = RoundView.set_scores_view(player1, player2)
         match.set_scores(score1, score2)
         player1.score_tournament += score1
         player2.score_tournament += score2
+        
+    def play_round(self, matches_list):
+        pass

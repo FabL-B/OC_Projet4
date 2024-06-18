@@ -1,5 +1,6 @@
 from datetime import datetime
-from models.player import Player
+
+from models.match import Match
 
 class Round:
     """A class that defines round."""
@@ -17,18 +18,25 @@ class Round:
 
     def to_dict_round(self):
         """Convert a round instance to a dictionary."""
+        matches_as_tuples = [
+            match.to_tuples_match() 
+            for match in self.matches_list
+            ]
         return {
             "round_number": self.round_number,
             "start_date_time": self.start_date_time,
             "end_date_time": self.end_date_time,
-            "matches_list": self.matches_list
+            "matches_list": matches_as_tuples
         }
 
     @staticmethod
     def from_dict_round(round_data):
         """Create a Round instance from a dictionary."""
+        matches_list = [Match.from_tuples_match(match_tuple)
+            for match_tuple in round_data["matches_list"]]
+        
         round_instance = Round(round_data["round_number"])
         round_instance.start_date_time = round_data["start_date_time"]
         round_instance.end_date_time = round_data["end_date_time"]
-        round_instance.matches_list = round_data["matches_list"]
+        round_instance.matches_list = matches_list
         return round_instance

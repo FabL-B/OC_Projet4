@@ -61,7 +61,7 @@ class TournamentView:
         print(f"You selected {tournaments_list[choice]["name"]}")
         return tournaments_list[choice]
 
-    def display_tournaments(tournaments_list):
+    def display_tournaments_list(tournaments_list):
         console = Console()
         table = Table(
             title="Tournaments list from database",
@@ -85,7 +85,7 @@ class TournamentView:
                 tournament["start_date"],
                 tournament["end_date"],
                 str(tournament["numbers of rounds"]),
-                str(tournament["actual round"]),
+                str(tournament["actual_round"]),
                 tournament["general remarks"]
             )
         console.print(table)
