@@ -89,6 +89,7 @@ class TournamentView:
                 tournament["general remarks"]
             )
         console.print(table)
+        print()
 
     def display_selected_tournament(selected_tournament):
         console = Console()
@@ -107,12 +108,13 @@ class TournamentView:
         
 
         table.add_row(
-            selected_tournament["name"],
-            selected_tournament["location"],
-            selected_tournament["start_date"],
-            selected_tournament["end_date"],
-            str(selected_tournament["numbers of rounds"]),
-            str(selected_tournament["actual_round"]),
-            selected_tournament["general remarks"]
+            selected_tournament.name,
+            selected_tournament.location,
+            selected_tournament.start_date,
+            selected_tournament.end_date,
+            str(selected_tournament.numbers_of_rounds),
+            str(selected_tournament.actual_round),
+            selected_tournament.general_remarks
             )
         console.print(table)
+        print()
