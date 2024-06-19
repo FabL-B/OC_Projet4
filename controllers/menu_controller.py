@@ -16,18 +16,16 @@ class MenuController:
     def display_main_menu(self):
         """Display the main menu and handle user choices."""
         while True:
-            print("Main Menu:")
-            print("1. Tournament Menu")  #faire des view
-            print("2. Player Menu")
-            print("3. Quit")
-
-            choice = input("Enter your choice: ")
+            MenuView.display_main_menu()
+            choice = MenuView.user_choice()
 
             if choice == "1":
                 self.display_tournament_menu()
             elif choice == "2":
                 self.display_player_menu()
             elif choice == "3":
+                self.display_reports_menu()
+            elif choice == "4":
                 exit()
             else:
                 print("Invalid choice, please try again.")
@@ -35,25 +33,15 @@ class MenuController:
     def display_tournament_menu(self):
         """Display the tournament menu and handle user choices."""
         while True:
-            print("\nTournament Menu:")
-            print("1. Display tournament infos")  #faire des view
-            print("2. Create a tournament")
-            print("3. Play a chosen tournament")
-            print("4. Return to main menu")
-
-            choice = input("Enter your choice: ")
+            MenuView.display_tournament_menu()
+            choice = MenuView.user_choice()
 
             if choice == "1":
-                selected_tournament = TournamentManager.select_tournament_from_list()
-                #display tournaments infos
-                #display rounds and matches
-                
-            elif choice == "2":
                 self.tournament_manager.create_new_tournament()
-            elif choice == "3":
+            elif choice == "2":
                 selected_tournament = TournamentManager.select_tournament_from_list()
                 TournamentManager.play_tournament(selected_tournament)
-            elif choice == "4":
+            elif choice == "3":
                 self.display_main_menu()
             else:
                 print("Invalid choice, please try again.")
@@ -61,12 +49,8 @@ class MenuController:
     def display_player_menu(self):
         """Display the player menu and handle user choices."""
         while True:
-            print("\nPlayer Menu:")
-            print("1. Display player list")  #faire des view
-            print("2. Create a player")
-            print("3. Return to main menu")
-
-            choice = input("Enter your choice: ")
+            MenuView.display_player_menu
+            choice = MenuView.user_choice()
 
             if choice == "1":
                 players_list = Player.load_players_from_db()
@@ -75,8 +59,28 @@ class MenuController:
                 PlayerManager.create_new_player()
             elif choice == "3":
                 self.display_main_menu()
-            elif choice == "5":
+            elif choice == "5":#a supprimer
                 test_list = self.player_manager.create_players_list()
                 PlayerView.display_players(test_list)
             else:
                 print("Invalid choice, please try again.")
+
+    def display_reports_menu(self):
+        """Display the reports menu and handle user choices."""
+        MenuView.display_reports_menu()
+        choice = MenuView.user_choice()
+        
+        if choice == "1":
+            players_list = Player.load_players_from_db()
+            PlayerView.display_players(players_list)
+        elif choice == "2":
+                        #demander de choisir un tournoi
+                #demander d'afficher la liste des joueurs du tournoi
+                #demander d'afficher la liste des rounds et matchs du tournoi
+            selected_tournament = TournamentManager.select_tournament_from_list()
+            TournamentView.display_selected_tournament(selected_tournament)
+            PlayerView.display_players(selected_tournament.players_list)
+        elif choice == "3":
+            self.display_main_menu()
+        else:
+            print("Invalid choice, please try again.")        
