@@ -3,10 +3,9 @@ from controllers.round_manager import RoundManager
 from controllers.player_manager import PlayerManager
 from views.tournament_view import TournamentView
 
-
 class TournamentManager:
     """Tournament manager."""
-    
+
     def __init__(self):
         self.player_manager = PlayerManager()
         self.tournament_view = TournamentView()
@@ -23,9 +22,9 @@ class TournamentManager:
         # Instantiate the selected tournament    
         selected_tournament = Tournament.from_dict_tournament(selected_tournament)
         return selected_tournament
-    
+
     def play_tournament(selected_tournament):
-        
+
         selected_tournament.actual_round += 1
         for i in range(selected_tournament.actual_round, selected_tournament.numbers_of_rounds + 1):
             round_manager = RoundManager()
@@ -41,16 +40,14 @@ class TournamentManager:
             if selected_tournament.actual_round == selected_tournament.numbers_of_rounds + 1:
                 print(f"Tournament {selected_tournament.name} is over")
                 return
-            
+
             print("Play new round or exit? (P to play, N to exit)")
             answer = input().capitalize()
             if answer == "N":
                 Tournament.save_tournament(selected_tournament)
                 break
-
         print("Returning to menu.")
 
-    
     def create_new_tournament(self):
         """Add a new tournament in data base."""
         name = TournamentView.get_tournament_name()
@@ -62,7 +59,7 @@ class TournamentManager:
         rounds_list = []
         players_list = self.player_manager.create_players_list()
         general_remarks = TournamentView.get_general_remarks()
-        
+
         new_tournament = Tournament(
             name,
             location,

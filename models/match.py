@@ -19,6 +19,7 @@ class Match:
             player_dict = player.to_dict_player()
             match.append((player_dict, score))
         return match
+
     @staticmethod
     def from_tuples_match(tuples_list):
         """Convert a list of tuples back into a Match object."""

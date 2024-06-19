@@ -6,10 +6,10 @@ from views.round_view import RoundView
 
 class RoundManager:
     """Round manager."""
-    
+
     def __init__(self):
         self.round_view = RoundView()
-    
+
     def create_new_round(self, tournament):
         """Create a new round."""
         round_number = tournament.actual_round + 1
@@ -23,7 +23,7 @@ class RoundManager:
             tournament.players_list.sort(key=lambda player: player.score_tournament, reverse=True)
         new_round.matches_list = self.create_match_list(tournament.players_list)
         return new_round
-    
+
     def create_match_list(self, players_list):
         """Create matches list."""
         matches_list = []
@@ -40,6 +40,6 @@ class RoundManager:
         match.set_scores(score1, score2)
         player1.score_tournament += score1
         player2.score_tournament += score2
-        
+
     def play_round(self, matches_list):
         pass

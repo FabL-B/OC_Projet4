@@ -3,7 +3,7 @@ from views.player_view import PlayerView
 
 class PlayerManager:
     """Player manager."""
-    
+
     def __init__(self):
         self.players = Player.load_players_from_db() #liste de joueurs
 
@@ -23,9 +23,9 @@ class PlayerManager:
         """Create a list of players for tournament."""
         players_list_for_tournament = []
         players_list_from_db = Player.load_players_from_db()
-        PlayerView.display_players(players_list_from_db)
-        
+
         while True:
+            PlayerView.display_players(players_list_from_db)
             selected_player = self.select_player_from_db(players_list_from_db)
             if selected_player is None:
                 new_player = self.create_new_player()
@@ -33,6 +33,8 @@ class PlayerManager:
                     players_list_for_tournament.append(new_player)
             else:
                 players_list_for_tournament.append(selected_player)
+                players_list_from_db.remove(selected_player)
+
             # Ask if more players to add
             user_request = PlayerView.add_player_request()
             if user_request == "N":

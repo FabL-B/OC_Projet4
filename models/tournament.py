@@ -69,6 +69,7 @@ class Tournament:
             players_list=players_list,
             general_remarks=tournament_dict["general remarks"]
         )
+
     @staticmethod
     def save_tournament(tournament):
         """Save the current state of the tournament to the database."""
