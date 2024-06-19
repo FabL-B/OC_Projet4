@@ -11,3 +11,6 @@ class RoundView:
         print(f"Enter score for {player2.name} {player2.surname} (0, 0.5, 1): ")
         score2 = float(input())
         return score1, score2
+    
+    def display_round(round_list):
+        pass

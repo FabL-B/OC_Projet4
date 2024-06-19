@@ -36,7 +36,7 @@ class MenuController:
         """Display the tournament menu and handle user choices."""
         while True:
             print("\nTournament Menu:")
-            print("1. Display tournament list")  #faire des view
+            print("1. Display tournament infos")  #faire des view
             print("2. Create a tournament")
             print("3. Play a chosen tournament")
             print("4. Return to main menu")
@@ -44,8 +44,9 @@ class MenuController:
             choice = input("Enter your choice: ")
 
             if choice == "1":
-                tournaments = Tournament.load_tournaments_from_db()
-                TournamentView.display_tournaments_list(tournaments)
+                selected_tournament = TournamentManager.select_tournament_from_list()
+                #display tournaments infos
+                #display rounds and matches
                 
             elif choice == "2":
                 self.tournament_manager.create_new_tournament()

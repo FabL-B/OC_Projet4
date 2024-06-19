@@ -89,3 +89,6 @@ class TournamentView:
                 tournament["general remarks"]
             )
         console.print(table)
+
+    def display_selected_tournament(selected_tournament):
+        pass

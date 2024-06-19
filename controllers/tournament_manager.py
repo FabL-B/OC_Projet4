@@ -21,7 +21,7 @@ class TournamentManager:
         # Select the tournament from list with index
         selected_tournament = TournamentView.select_tournament_view(tournaments_list)
         # Instantiate the selected tournament    
-        selected_tournament = Tournament.from_dict_tournament()
+        selected_tournament = Tournament.from_dict_tournament(selected_tournament)
         return selected_tournament
     
     def play_tournament(selected_tournament):
