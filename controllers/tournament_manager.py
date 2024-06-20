@@ -10,6 +10,7 @@ class TournamentManager:
     def __init__(self):
         self.player_manager = PlayerManager()
         self.tournament_view = TournamentView()
+        self.round_manager = RoundManager()
 
     def select_tournament_from_list(self):
         tournaments_list = Tournament.load_tournaments_from_db()
@@ -26,26 +27,23 @@ class TournamentManager:
 
     def play_tournament(self, selected_tournament):
 
-        selected_tournament.actual_round += 1
         for i in range(selected_tournament.actual_round,
                        selected_tournament.numbers_of_rounds + 1):
-            round_manager = RoundManager()
-            new_round = round_manager.create_new_round(selected_tournament)
-            print(f"Starting Round {i}")
-            for match in new_round.matches_list:
-                round_manager.enter_match_result(match)
-            new_round.end_round()
-            print(f"Round {i} completed.")
-            selected_tournament.rounds_list.append(new_round)
             selected_tournament.actual_round += 1
+            new_round = self.round_manager.create_new_round(selected_tournament)
+            self.tournament_view.display_starting_round(i)
+            for match in new_round.matches_list:
+                self.round_manager.enter_match_result(match)
+            new_round.end_round()
+            self.tournament_view.display_round_completed(i)
+            selected_tournament.rounds_list.append(new_round)
             Tournament.save_tournament(selected_tournament)
 
-            if selected_tournament.actual_round == selected_tournament.numbers_of_rounds + 1:
-                print(f"Tournament {selected_tournament.name} is over")
+            if selected_tournament.actual_round == selected_tournament.numbers_of_rounds:
+                self.tournament_view.display_tournament_over(selected_tournament.name)
                 return
 
-            print("Play new round or exit? (P to play, N to exit)")
-            answer = input().capitalize()
+            answer = self.tournament_view.get_play_new_round_or_exit()
             if answer == "N":
                 break
         print("Returning to menu.")

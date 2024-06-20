@@ -8,37 +8,49 @@ class TournamentView:
     @staticmethod
     def get_tournament_name():
         """Ask user to enter the player name"""
-        return input("Enter the tournament name: ")
+        return input("\nEnter the tournament name: ")
 
     @staticmethod
     def get_tournament_location():
         """Ask user to enter the player name"""
-        return input("Enter the tournament location: ")
+        return input("\nEnter the tournament location: ")
 
     @staticmethod
     def get_tournament_start_date():
         """Ask user to enter the player name"""
-        return input("Enter the tournament start date (YYYY-MM-DD): ")
+        return input("\nEnter the tournament start date (YYYY-MM-DD): ")
 
     @staticmethod
     def get_tournament_end_date():
         """Ask user to enter the player name"""
-        return input("Enter the tournament end date (YYYY-MM-DD): ")
+        return input("\nEnter the tournament end date (YYYY-MM-DD): ")
 
     @staticmethod
     def get_number_of_rounds():
         """Ask user to enter the player name"""
         while True:
-            rounds = input("Enter the number of rounds: ")
+            rounds = input("\nEnter the number of rounds: ")
             if rounds.isdigit():
                 return int(rounds)
             else:
-                print("Invalid input. Please enter a valid number.")
+                print("\nInvalid input. Please enter a valid number.")
 
     @staticmethod
     def get_general_remarks():
         """Ask user to enter the player name"""
-        return input("Enter any general remarks for the tournament: ")
+        return input("\nEnter any general remarks for the tournament: ")
+
+    def display_starting_round(self, round_number):
+        print(f"\nStarting Round {round_number}")
+
+    def display_round_completed(self, round_number):
+        print(f"\nRound {round_number} completed.")
+
+    def display_tournament_over(self, tournament_name):
+        print(f"\nTournament {tournament_name} is over")
+
+    def get_play_new_round_or_exit(self):
+        return input("\nPlay new round or exit? (P to play, N to exit)").capitalize()
 
     def select_tournament_view(tournaments_list):
         """Ask user to select a tournaments from a list"""
@@ -50,11 +62,11 @@ class TournamentView:
                     break
                 else:
                     print(
-                        "Invalid choice. Please choose a number within the range.")
+                        "\nInvalid choice. Please choose a number within the range.")
             except ValueError:
-                print("Invalid input. Please enter a number.")
+                print("\nInvalid input. Please enter a number.")
         print()
-        print(f"You selected {tournaments_list[choice]["name"]}")
+        print(f"\nYou selected {tournaments_list[choice]["name"]}")
         return tournaments_list[choice]
 
     def display_tournaments_list(tournaments_list):

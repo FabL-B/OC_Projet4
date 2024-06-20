@@ -13,7 +13,7 @@ class RoundManager:
 
     def create_new_round(self, tournament):
         """Create a new round."""
-        round_number = tournament.actual_round + 1
+        round_number = tournament.actual_round
         new_round = Round(round_number)
 
         # For first round, shuffle players list
