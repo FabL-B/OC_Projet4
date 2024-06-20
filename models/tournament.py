@@ -4,12 +4,13 @@ import json
 from models.player import Player
 from models.round import Round
 
+
 class Tournament:
     """A class that defines tournament."""
 
     def __init__(
-            self, name, location, start_date, end_date, numbers_of_rounds=4, 
-            actual_round = 0, rounds_list = None, players_list = None, general_remarks = ""):
+            self, name, location, start_date, end_date, numbers_of_rounds=4,
+            actual_round=0, rounds_list=None, players_list=None, general_remarks=""):
         """Initialize a tournament."""
         self.name = name
         self.location = location
@@ -23,14 +24,14 @@ class Tournament:
 
     def to_dict_tournament(self):
         """Set tournament data in dictionnary."""
-        
-        rounds_as_dicts = [round.to_dict_round() 
-            for round in self.rounds_list
-            ]
-        players_as_dicts = [player.to_dict_player() 
-            for player in self.players_list
-            ]
-        
+
+        rounds_as_dicts = [round.to_dict_round()
+                           for round in self.rounds_list
+                           ]
+        players_as_dicts = [player.to_dict_player()
+                            for player in self.players_list
+                            ]
+
         return {
             "name": self.name,
             "location": self.location,
@@ -47,10 +48,9 @@ class Tournament:
     def from_dict_tournament(tournament_dict):
         """Instantiate a tournament from a dictionnary."""
         # Instantiate player list from dictionary
-        players_list = [
-            Player.from_dict_player(player_dict) 
-            for player_dict in tournament_dict["players_list"]
-        ]
+        players_list = [Player.from_dict_player(player_dict)
+                        for player_dict in tournament_dict["players_list"]
+                        ]
 
         # Instantiate round list from dictionary
         rounds_list = [
@@ -75,13 +75,13 @@ class Tournament:
         """Save the current state of the tournament to the database."""
         json_file_path = "tournaments.json"
 
-        # Convert the tournament to a dictionary    
+        # Convert the tournament to a dictionary
         tournament = tournament.to_dict_tournament()
-        
+
         # Check if the file exists
         if os.path.exists(json_file_path):
-                with open(json_file_path, "r") as file:
-                    tournaments = json.load(file)
+            with open(json_file_path, "r") as file:
+                tournaments = json.load(file)
         else:
             tournaments = []
 
@@ -99,15 +99,15 @@ class Tournament:
         temp_file_path = f"{json_file_path}.tmp"
         with open(temp_file_path, "w") as file:
             json.dump(tournaments, file, indent=4)
-        
+
         os.replace(temp_file_path, json_file_path)
-        
+
         print(f"Tournament '{tournament['name']}' successfully saved.")
 
     @staticmethod
     def load_tournaments_from_db():
         json_file_path = "tournaments.json"
-        
+
         with open(json_file_path, "r") as file:
             tournaments = json.load(file)
         return tournaments

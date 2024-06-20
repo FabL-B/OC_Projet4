@@ -2,20 +2,21 @@ from rich.console import Console
 from rich.table import Table
 from rich.box import HEAVY_HEAD
 
+
 class RoundView:
-    
+
     def match_view(match):
         player1 = match.player_scores[0][0]
         player2 = match.player_scores[1][0]
         print(f"Macth opposing {player1.name} VS {player2.name}")
-    
+
     def set_scores_view(player1, player2):
         print(f"Enter score for {player1.name} {player1.surname} (0, 0.5, 1): ")
         score1 = float(input())
         print(f"Enter score for {player2.name} {player2.surname} (0, 0.5, 1): ")
         score2 = float(input())
         return score1, score2
-    
+
     def display_rounds(round_list):
         console = Console()
         table = Table(
@@ -27,7 +28,6 @@ class RoundView:
         table.add_column("Round start time", style="cyan", justify="left")
         table.add_column("Round end time", style="cyan", justify="left")
         table.add_column("Matches", style="cyan", justify="left")
-      
 
         for round in round_list:
             matches = round.matches_list

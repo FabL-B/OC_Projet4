@@ -4,6 +4,7 @@ from models.round import Round
 from models.match import Match
 from views.round_view import RoundView
 
+
 class RoundManager:
     """Round manager."""
 

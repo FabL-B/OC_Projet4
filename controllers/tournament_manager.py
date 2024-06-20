@@ -3,6 +3,7 @@ from controllers.round_manager import RoundManager
 from controllers.player_manager import PlayerManager
 from views.tournament_view import TournamentView
 
+
 class TournamentManager:
     """Tournament manager."""
 
@@ -19,14 +20,15 @@ class TournamentManager:
         TournamentView.display_tournaments_list(tournaments_list)
         # Select the tournament from list with index
         selected_tournament = TournamentView.select_tournament_view(tournaments_list)
-        # Instantiate the selected tournament    
+        # Instantiate the selected tournament
         selected_tournament = Tournament.from_dict_tournament(selected_tournament)
         return selected_tournament
 
     def play_tournament(self, selected_tournament):
 
         selected_tournament.actual_round += 1
-        for i in range(selected_tournament.actual_round, selected_tournament.numbers_of_rounds + 1):
+        for i in range(selected_tournament.actual_round,
+                       selected_tournament.numbers_of_rounds + 1):
             round_manager = RoundManager()
             new_round = round_manager.create_new_round(selected_tournament)
             print(f"Starting Round {i}")

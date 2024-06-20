@@ -1,6 +1,7 @@
 from models.player import Player
 from views.player_view import PlayerView
 
+
 class PlayerManager:
     """Player manager."""
 
@@ -14,7 +15,7 @@ class PlayerManager:
         birth_date = PlayerView.get_player_birth_date()
         chess_id = PlayerView.get_player_chess_id()
         score_tournament = 0
-        
+
         new_player = Player(name, surname, chess_id, birth_date, score_tournament)
         Player.save_player_in_db(new_player)
         return new_player
@@ -44,12 +45,10 @@ class PlayerManager:
                     print("The number of players is odd; you need one more.")
                 else:
                     break
-
         return players_list_for_tournament
 
     def sort_players_list_by_name(self, players_list):
         return sorted(players_list, key=lambda player: (player.surname, player.name))
-        
 
     def select_player_from_db(self, players_list):
         """Ask user to select a tournaments from a list"""
@@ -60,11 +59,11 @@ class PlayerManager:
                     "Enter the number of the player to add: ")) - 1
                 if 0 <= choice < len(players_list):
                     break
-                elif choice == -1 :
+                elif choice == -1:
                     return None
                 else:
                     print(
-                    "Invalid choice. Please choose a number within the range.")
+                        "Invalid choice. Please choose a number within the range.")
             except ValueError:
                 print("Invalid input. Please enter a number.")
         print()

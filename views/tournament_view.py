@@ -2,6 +2,7 @@ from rich.console import Console
 from rich.table import Table
 from rich.box import HEAVY_HEAD
 
+
 class TournamentView:
 
     @staticmethod
@@ -38,12 +39,7 @@ class TournamentView:
     def get_general_remarks():
         """Ask user to enter the player name"""
         return input("Enter any general remarks for the tournament: ")
-    
-    @staticmethod
-    def ask_add_players_list(): # ??? A VERIFIER
-        return input("To add a new player press enter, else press 'q'")
-    
-    
+
     def select_tournament_view(tournaments_list):
         """Ask user to select a tournaments from a list"""
         while True:
@@ -54,7 +50,7 @@ class TournamentView:
                     break
                 else:
                     print(
-                    "Invalid choice. Please choose a number within the range.")
+                        "Invalid choice. Please choose a number within the range.")
             except ValueError:
                 print("Invalid input. Please enter a number.")
         print()
@@ -76,7 +72,7 @@ class TournamentView:
         table.add_column("Numbers of rounds", style="cyan", justify="left")
         table.add_column("Actual round", style="cyan", justify="left")
         table.add_column("General remarks", style="cyan", justify="left")
-        
+
         for idx, tournament in enumerate(tournaments_list, start=1):
             table.add_row(
                 str(idx),
@@ -105,7 +101,6 @@ class TournamentView:
         table.add_column("Numbers of rounds", style="cyan", justify="left")
         table.add_column("Actual round", style="cyan", justify="left")
         table.add_column("General remarks", style="cyan", justify="left")
-        
 
         table.add_row(
             selected_tournament.name,

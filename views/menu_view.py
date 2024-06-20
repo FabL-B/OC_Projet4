@@ -1,5 +1,5 @@
 class MenuView:
-    
+
     def display_main_menu():
         print("Main Menu:")
         print("1. Tournament Menu")
@@ -23,7 +23,7 @@ class MenuView:
         print("\nReports Menu:")
         print("1. Players reports")
         print("2. Tournaments reports")
-        print("3. Return to main menu")        
+        print("3. Return to main menu")
 
     def user_choice():
         choice = input("\nEnter your choice: ")

@@ -1,6 +1,7 @@
 import os
 import json
 
+
 class Player:
     """A class that defines player."""
 
@@ -11,7 +12,7 @@ class Player:
         self.chess_id = chess_id
         self.birth_date = birth_date
         self.score_tournament = score_tournament
-    
+
     @staticmethod
     def save_player_in_db(player):
         """Save the player in the database."""
@@ -22,7 +23,7 @@ class Player:
         else:
             players_data = []
 
-        # Convert the player to a dictionary  
+        # Convert the player to a dictionary
         player_dict = player.to_dict_player()
 
         # Check if the player already exists
@@ -33,14 +34,14 @@ class Player:
                 players_data[index] = player_dict
                 player_in_db = True
                 break
-        
+
         # If not in database, add it.
         if not player_in_db:
             players_data.append(player_dict)
-        
+
         with open(json_file_path, "w") as file:
             json.dump(players_data, file, indent=4)
-        
+
         print(f"Player {player.name} updated in database.")
 
     @staticmethod
@@ -55,7 +56,7 @@ class Player:
                 for player_data in players_data:
                     player = Player.from_dict_player(player_data)
                     players_list.append(player)
-        
+
         return players_list
 
     def to_dict_player(self):

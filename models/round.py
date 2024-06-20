@@ -2,6 +2,7 @@ from datetime import datetime
 
 from models.match import Match
 
+
 class Round:
     """A class that defines round."""
 
@@ -19,7 +20,7 @@ class Round:
     def to_dict_round(self):
         """Convert a round instance to a dictionary."""
         matches_as_tuples = [
-            match.to_tuples_match() 
+            match.to_tuples_match()
             for match in self.matches_list
             ]
         return {
@@ -33,8 +34,8 @@ class Round:
     def from_dict_round(round_data):
         """Create a Round instance from a dictionary."""
         matches_list = [Match.from_tuples_match(match_tuple)
-            for match_tuple in round_data["matches_list"]]
-        
+                        for match_tuple in round_data["matches_list"]]
+
         round_instance = Round(round_data["round_number"])
         round_instance.start_date_time = round_data["start_date_time"]
         round_instance.end_date_time = round_data["end_date_time"]
