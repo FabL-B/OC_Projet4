@@ -41,7 +41,6 @@ class PlayerView:
         return user_request
 
     def display_players(players_list):
-        sorted_players = sorted(players_list, key=lambda player: (player.surname, player.name))
         console = Console()
         table = Table(
             title="Players list from database",
@@ -54,7 +53,7 @@ class PlayerView:
         table.add_column("Chess ID", style="cyan", justify="left")
         table.add_column("Birth date", style="cyan", justify="left")
         
-        for idx, player in enumerate(sorted_players, start=1):
+        for idx, player in enumerate(players_list, start=1):
             table.add_row(
                 str(idx),
                 player.surname,

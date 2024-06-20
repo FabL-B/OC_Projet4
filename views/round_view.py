@@ -5,8 +5,8 @@ from rich.box import HEAVY_HEAD
 class RoundView:
     
     def match_view(match):
-        player1 = match.players[0][0]
-        player2 = match.players[1][0]
+        player1 = match.player_scores[0][0]
+        player2 = match.player_scores[1][0]
         print(f"Macth opposing {player1.name} VS {player2.name}")
     
     def set_scores_view(player1, player2):
@@ -32,7 +32,7 @@ class RoundView:
         for round in round_list:
             matches = round.matches_list
             for match in matches:
-                match_info = f"{match.players[0][0].name} {match.players[0][1]} VS {match.players[1][1]} {match.players[1][0].name}"
+                match_info = f"{match.player_scores[0][0].name} {match.player_scores[0][1]} VS {match.player_scores[1][1]} {match.player_scores[1][0].name}"
                 table.add_row(
                     str(round.round_number),
                     str(round.start_date_time),

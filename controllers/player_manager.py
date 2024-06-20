@@ -5,7 +5,7 @@ class PlayerManager:
     """Player manager."""
 
     def __init__(self):
-        self.players = Player.load_players_from_db() #liste de joueurs
+        self.players = Player.load_players_from_db()
 
     def create_new_player(self):
         """Add a new player."""
@@ -23,6 +23,7 @@ class PlayerManager:
         """Create a list of players for tournament."""
         players_list_for_tournament = []
         players_list_from_db = Player.load_players_from_db()
+        players_list_from_db = self.sort_players_list_by_name(players_list_from_db)
 
         while True:
             PlayerView.display_players(players_list_from_db)
@@ -45,6 +46,10 @@ class PlayerManager:
                     break
 
         return players_list_for_tournament
+
+    def sort_players_list_by_name(self, players_list):
+        return sorted(players_list, key=lambda player: (player.surname, player.name))
+        
 
     def select_player_from_db(self, players_list):
         """Ask user to select a tournaments from a list"""

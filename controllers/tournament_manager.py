@@ -10,7 +10,7 @@ class TournamentManager:
         self.player_manager = PlayerManager()
         self.tournament_view = TournamentView()
 
-    def select_tournament_from_list():
+    def select_tournament_from_list(self):
         tournaments_list = Tournament.load_tournaments_from_db()
         if not tournaments_list:
             print("No tournaments available.")
@@ -23,7 +23,7 @@ class TournamentManager:
         selected_tournament = Tournament.from_dict_tournament(selected_tournament)
         return selected_tournament
 
-    def play_tournament(selected_tournament):
+    def play_tournament(self, selected_tournament):
 
         selected_tournament.actual_round += 1
         for i in range(selected_tournament.actual_round, selected_tournament.numbers_of_rounds + 1):
@@ -36,6 +36,7 @@ class TournamentManager:
             print(f"Round {i} completed.")
             selected_tournament.rounds_list.append(new_round)
             selected_tournament.actual_round += 1
+            Tournament.save_tournament(selected_tournament)
 
             if selected_tournament.actual_round == selected_tournament.numbers_of_rounds + 1:
                 print(f"Tournament {selected_tournament.name} is over")
@@ -44,7 +45,6 @@ class TournamentManager:
             print("Play new round or exit? (P to play, N to exit)")
             answer = input().capitalize()
             if answer == "N":
-                Tournament.save_tournament(selected_tournament)
                 break
         print("Returning to menu.")
 
