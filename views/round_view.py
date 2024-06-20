@@ -24,10 +24,10 @@ class RoundView:
             style='green',
             box=HEAVY_HEAD
         )
-        table.add_column("Round number", style="cyan", justify="left")
-        table.add_column("Round start time", style="cyan", justify="left")
-        table.add_column("Round end time", style="cyan", justify="left")
-        table.add_column("Matches", style="cyan", justify="left")
+        table.add_column("Round number", style="magenta", justify="center")
+        table.add_column("Round start time", style="cyan2", justify="left")
+        table.add_column("Round end time", style="cyan2", justify="left")
+        table.add_column("Matches", style="cyan3", justify="center")
 
         for round in round_list:
             matches = round.matches_list
@@ -39,5 +39,6 @@ class RoundView:
                     str(round.end_date_time),
                     str(match_info)
                 )
+            table.add_section()
         console.print(table)
         print()

@@ -76,14 +76,14 @@ class TournamentView:
             style='green',
             box=HEAVY_HEAD
         )
-        table.add_column("N°", style="cyan", justify="left")
-        table.add_column("Name", style="cyan", justify="left")
-        table.add_column("Location", style="cyan", justify="left")
-        table.add_column("Start date", style="cyan", justify="left")
-        table.add_column("End date", style="cyan", justify="left")
-        table.add_column("Numbers of rounds", style="cyan", justify="left")
-        table.add_column("Actual round", style="cyan", justify="left")
-        table.add_column("General remarks", style="cyan", justify="left")
+        table.add_column("N°", style="magenta", justify="left")
+        table.add_column("Name", style="cyan3", justify="left")
+        table.add_column("Location", style="cyan3", justify="left")
+        table.add_column("Start date", style="cyan2", justify="left")
+        table.add_column("End date", style="cyan2", justify="left")
+        table.add_column("Numbers of rounds", style="magenta", justify="left")
+        table.add_column("Actual round", style="magenta", justify="left")
+        table.add_column("General remarks", style="cyan3", justify="left")
 
         for idx, tournament in enumerate(tournaments_list, start=1):
             table.add_row(
@@ -106,13 +106,13 @@ class TournamentView:
             style='green',
             box=HEAVY_HEAD
         )
-        table.add_column("Name", style="cyan", justify="left")
+        table.add_column("Name", style="cyan3", justify="left")
         table.add_column("Location", style="cyan", justify="left")
-        table.add_column("Start date", style="cyan", justify="left")
-        table.add_column("End date", style="cyan", justify="left")
-        table.add_column("Numbers of rounds", style="cyan", justify="left")
-        table.add_column("Actual round", style="cyan", justify="left")
-        table.add_column("General remarks", style="cyan", justify="left")
+        table.add_column("Start date", style="cyan2", justify="left")
+        table.add_column("End date", style="cyan2", justify="left")
+        table.add_column("Numbers of rounds", style="magenta", justify="left")
+        table.add_column("Actual round", style="magenta", justify="left")
+        table.add_column("General remarks", style="cyan3", justify="left")
 
         table.add_row(
             selected_tournament.name,
