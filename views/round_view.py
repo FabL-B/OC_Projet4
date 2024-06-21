@@ -4,24 +4,34 @@ from rich.box import HEAVY_HEAD
 
 
 class RoundView:
+    """A class to represent the view for rounds in a tournament."""
+    
+    def set_scores_view(player):
+        """Ask user to enter a valid score for the given player."""
+        valid_scores = [0, 0.5, 1]
+        print(f"Enter score for {player.name} {player.surname} (0, 0.5, 1): ")
+        while True:
+            try:
+                score = float(input())
+                if score in valid_scores:
+                    return score
+                else:
+                    print("Invalid score. Please enter 0, 0.5, or 1.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
 
-    def match_view(match):
+    def display_match_view(match):
+        """Display names of the players opposing each other in the match."""
         player1 = match.player_scores[0][0]
         player2 = match.player_scores[1][0]
         print(f"Macth opposing {player1.name} VS {player2.name}")
 
-    def set_scores_view(player1, player2):
-        print(f"Enter score for {player1.name} {player1.surname} (0, 0.5, 1): ")
-        score1 = float(input())
-        print(f"Enter score for {player2.name} {player2.surname} (0, 0.5, 1): ")
-        score2 = float(input())
-        return score1, score2
-
     def display_rounds(round_list):
+        """Display rounds list and each matches for the round."""
         console = Console()
         table = Table(
-            title="rounds list from database",
-            style='green',
+            title="Rounds list",
+            style="green",
             box=HEAVY_HEAD
         )
         table.add_column("Round number", style="magenta", justify="center")

@@ -31,11 +31,11 @@ class TournamentManager:
                        selected_tournament.numbers_of_rounds + 1):
             selected_tournament.actual_round += 1
             new_round = self.round_manager.create_new_round(selected_tournament)
-            self.tournament_view.display_starting_round(i)
+            self.tournament_view.display_starting_round(i+1)
             for match in new_round.matches_list:
                 self.round_manager.enter_match_result(match)
             new_round.end_round()
-            self.tournament_view.display_round_completed(i)
+            self.tournament_view.display_round_completed(i+1)
             selected_tournament.rounds_list.append(new_round)
             Tournament.save_tournament(selected_tournament)
 
@@ -46,7 +46,6 @@ class TournamentManager:
             answer = self.tournament_view.get_play_new_round_or_exit()
             if answer == "N":
                 break
-        print("Returning to menu.")
 
     def create_new_tournament(self):
         """Add a new tournament in data base."""

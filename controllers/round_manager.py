@@ -35,9 +35,10 @@ class RoundManager:
 
     def enter_match_result(self, match):
         """Enter scores for each match manually."""
-        RoundView.match_view(match)
+        RoundView.display_match_view(match)
         player1, player2 = match.player_scores[0][0], match.player_scores[1][0]
-        score1, score2 = RoundView.set_scores_view(player1, player2)
+        score1 = RoundView.set_scores_view(player1)
+        score2 = RoundView.set_scores_view(player2)
         match.set_scores(score1, score2)
         player1.score_tournament += score1
         player2.score_tournament += score2
