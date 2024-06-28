@@ -14,6 +14,7 @@ class MenuController:
     def __init__(self):
         self.player_manager = PlayerManager()
         self.tournament_manager = TournamentManager()
+        self.tournament_view = TournamentView()
 
     def display_main_menu(self):
         """Display the main menu and handle user choices."""
@@ -42,7 +43,10 @@ class MenuController:
                 self.tournament_manager.create_new_tournament()
             elif choice == "2":
                 selected_tournament = self.tournament_manager.select_tournament_from_list()
-                self.tournament_manager.play_tournament(selected_tournament)
+                if selected_tournament:
+                    self.tournament_manager.play_tournament(selected_tournament)
+                else:
+                    self.tournament_view.selected_tournament_is_over()
             elif choice == "3":
                 self.display_main_menu()
             else:

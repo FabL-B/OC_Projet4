@@ -23,6 +23,8 @@ class TournamentManager:
         selected_tournament = TournamentView.select_tournament_view(tournaments_list)
         # Instantiate the selected tournament
         selected_tournament = Tournament.from_dict_tournament(selected_tournament)
+        if selected_tournament.actual_round == selected_tournament.numbers_of_rounds:
+            return None
         return selected_tournament
 
     def play_tournament(self, selected_tournament):

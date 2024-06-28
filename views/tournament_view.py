@@ -54,6 +54,11 @@ class TournamentView:
         """Ask user to enter general remarks."""
         return input("\nEnter any general remarks for the tournament: ")
 
+    @staticmethod
+    def selected_tournament_is_over():
+        """Display error message when trying to play a completed tournament."""
+        print("This tournament is over and cannot be played anymore.")
+
     def get_play_new_round_or_exit(self):
         """Ask user to play a new round or exit."""
         while True:
