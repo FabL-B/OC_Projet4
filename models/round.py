@@ -41,3 +41,17 @@ class Round:
         round_instance.end_date_time = round_data["end_date_time"]
         round_instance.matches_list = matches_list
         return round_instance
+
+    @staticmethod
+    def get_previous_matches(rounds_list):
+        """Get the previous matches in a list."""
+        previous_matches = []
+        for round in rounds_list:
+            for match in round.matches_list:
+                previous_matches.append(
+                    match.get_players()
+                    )
+                previous_matches.append(
+                    (match.get_players()[1], match.get_players()[0])
+                    )
+        return previous_matches

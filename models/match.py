@@ -29,3 +29,7 @@ class Match:
         match = Match(player1, player2)
         match.set_scores(score1, score2)
         return match
+
+    def get_players(self):
+        """Return a tuple of the players in the match."""
+        return (self.player_scores[0][0], self.player_scores[1][0])

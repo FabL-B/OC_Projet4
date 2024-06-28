@@ -15,13 +15,15 @@ class RoundManager:
         """Create a new round."""
         round_number = tournament.actual_round
         new_round = Round(round_number)
-
         # For first round, shuffle players list
         if round_number == 1:
             random.shuffle(tournament.players_list)
         # For next rounds, sort players by their tournament score
         else:
-            tournament.players_list.sort(key=lambda player: player.score_tournament, reverse=True)
+            random.shuffle(tournament.players_list)
+            self.sort_players_by_score(tournament.players_list)
+            self.avoid_previous_matchups(tournament.players_list,
+                                         tournament.rounds_list)
         new_round.matches_list = self.create_match_list(tournament.players_list)
         return new_round
 
@@ -43,5 +45,26 @@ class RoundManager:
         player1.score_tournament += score1
         player2.score_tournament += score2
 
-    def play_round(self, matches_list):
-        pass
+    def sort_players_by_score(self, players_list):
+        """Sort players by their tournament score."""
+        players_list.sort(key=lambda player: player.score_tournament, reverse=True)
+
+    def avoid_previous_matchups(self, players_list, rounds_list):
+        """Reorder the players list to avoid previous matchups."""
+        previous_matches = Round.get_previous_matches(rounds_list)
+
+        i = 0
+        while i < len(players_list) - 1:
+            player1 = players_list[i]
+            player2 = players_list[i + 1]
+            if ((player1, player2) in previous_matches or 
+                (player2, player1) in previous_matches):
+                # Try to find a new matchup for player1
+                for j in range(i + 2, len(players_list)):
+                    if ((player1, players_list[j]) not in previous_matches and
+                        (players_list[j], player1) not in previous_matches):
+                        players_list[i + 1], players_list[j] = players_list[j], players_list[i + 1]
+                        break
+                else:
+                    i += 1
+            i += 2
