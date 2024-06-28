@@ -66,7 +66,7 @@ class Player:
             "surname": self.surname,
             "birth_date": self.birth_date,
             "chess_id": self.chess_id,
-            "score tournament": self.score_tournament
+            "score_tournament": self.score_tournament
         }
 
     @staticmethod
@@ -77,5 +77,5 @@ class Player:
             surname=player_data["surname"],
             chess_id=player_data["chess_id"],
             birth_date=player_data["birth_date"],
-            score_tournament=player_data["score tournament"]
+            score_tournament=player_data["score_tournament"]
         )

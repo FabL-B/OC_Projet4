@@ -81,19 +81,19 @@ class TournamentView:
         return tournaments_list[choice]
 
     def display_starting_round(self, round_number):
-        """Display a message indicating the starting of a round in tournament."""
+        """Display indication of the starting of a round in tournament."""
         print(f"\nStarting Round {round_number}")
 
     def display_round_completed(self, round_number):
-        """Display a message indicating the ending of a round in tournament."""
+        """Display indication of the ending of a round in tournament."""
         print(f"\nRound {round_number} completed.")
 
     def display_tournament_over(self, tournament_name):
-        """Display a message indicating the ending of a tournament."""
+        """Display indication of the ending of a tournament."""
         print(f"\nTournament {tournament_name} is over")
 
     def display_tournaments_list(tournaments_list):
-        """Display a list of tournaments in a formatted table."""
+        """Display a list of tournaments in a table."""
         console = Console()
         table = Table(
             title="Tournaments list",
@@ -124,7 +124,7 @@ class TournamentView:
         print()
 
     def display_selected_tournament(selected_tournament):
-        """Display informations about a selected tournament in a formatted table."""
+        """Display informations about a selected tournament in a table."""
         console = Console()
         table = Table(
             title=f"Tournament {selected_tournament.name} infos",

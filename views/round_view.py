@@ -42,7 +42,14 @@ class RoundView:
         for round in round_list:
             matches = round.matches_list
             for match in matches:
-                match_info = f"{match.player_scores[0][0].name} {match.player_scores[0][1]} VS {match.player_scores[1][1]} {match.player_scores[1][0].name}"
+                player1_name = match.player_scores[0][0].name
+                player1_score = match.player_scores[0][1]
+                player2_score = match.player_scores[1][1]
+                player2_name = match.player_scores[1][0].name
+                match_info = (
+                    f"{player1_name} {player1_score} VS "
+                    f"{player2_score} {player2_name}"
+                )
                 table.add_row(
                     str(round.round_number),
                     str(round.start_date_time),

@@ -59,6 +59,7 @@ class PlayerView:
         table.add_column("Name", style="cyan3", justify="left")
         table.add_column("Chess ID", style="cyan", justify="left")
         table.add_column("Birth date", style="cyan2", justify="left")
+        table.add_column("Score tournament", style="cyan2", justify="center")
 
         for idx, player in enumerate(players_list, start=1):
             table.add_row(
@@ -66,7 +67,8 @@ class PlayerView:
                 player.surname,
                 player.name,
                 player.chess_id,
-                player.birth_date
+                player.birth_date,
+                str(player.score_tournament)
             )
         console.print(table)
         print()
