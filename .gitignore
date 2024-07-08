@@ -10,7 +10,5 @@ __pycache__
 /players.json
 /tournaments.json
 
-/test4.py
-/test3.py
-/test2.py
-/test.py
+# Ignore flake8 reports
+/flake8_report
