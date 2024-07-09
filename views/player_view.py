@@ -46,6 +46,14 @@ class PlayerView:
             else:
                 print("You need to type 'Y' or 'N'")
 
+    @staticmethod
+    def invalid_player_list():
+        print("The number of players is odd; you need one more.")
+
+    @staticmethod
+    def invalid_input():
+        print("Invalid input. Please enter a number.")
+
     def display_players(players_list):
         """Display a list of players."""
         console = Console()

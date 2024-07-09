@@ -5,7 +5,7 @@ from rich.box import HEAVY_HEAD
 
 class RoundView:
     """A class to represent the view for rounds in a tournament."""
-    
+
     def set_scores_view(player):
         """Ask user to enter a valid score for the given player."""
         valid_scores = [0, 0.5, 1]

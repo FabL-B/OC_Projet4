@@ -57,12 +57,12 @@ class RoundManager:
         while i < len(players_list) - 1:
             player1 = players_list[i]
             player2 = players_list[i + 1]
-            if ((player1, player2) in previous_matches or 
-                (player2, player1) in previous_matches):
+            if ((player1, player2) in previous_matches or
+                    (player2, player1) in previous_matches):
                 # Try to find a new matchup for player1
                 for j in range(i + 2, len(players_list)):
                     if ((player1, players_list[j]) not in previous_matches and
-                        (players_list[j], player1) not in previous_matches):
+                            (players_list[j], player1) not in previous_matches):
                         players_list[i + 1], players_list[j] = players_list[j], players_list[i + 1]
                         break
                 else:

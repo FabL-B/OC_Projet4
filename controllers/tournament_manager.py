@@ -15,7 +15,6 @@ class TournamentManager:
     def select_tournament_from_list(self):
         tournaments_list = Tournament.load_tournaments_from_db()
         if not tournaments_list:
-            print("No tournaments available.")
             return
         # Display the tournaments list
         TournamentView.display_tournaments_list(tournaments_list)

@@ -42,7 +42,7 @@ class PlayerManager:
             if user_request == "N":
                 # Player list needs to be even
                 if len(players_list_for_tournament) % 2 != 0:
-                    print("The number of players is odd; you need one more.")
+                    PlayerView.invalid_player_list()
                 else:
                     break
         return players_list_for_tournament
@@ -65,7 +65,7 @@ class PlayerManager:
                     print(
                         "Invalid choice. Please choose a number within the range.")
             except ValueError:
-                print("Invalid input. Please enter a number.")
+                PlayerView.invalid_input()
         print()
         print(f"You selected {players_list[choice].name}")
         return players_list[choice]

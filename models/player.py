@@ -42,8 +42,6 @@ class Player:
         with open(json_file_path, "w") as file:
             json.dump(players_data, file, indent=4)
 
-        print(f"Player {player.name} updated in database.")
-
     @staticmethod
     def load_players_from_db():
         """Load players from the database."""

@@ -32,7 +32,7 @@ class ApplicationController:
             elif choice == "4":
                 exit()
             else:
-                print("Invalid choice, please try again.")
+                MenuView.invalid_choice()
 
     def display_tournament_menu(self):
         """Display the tournament menu and handle user choices."""
@@ -47,11 +47,11 @@ class ApplicationController:
                 if selected_tournament.actual_round == selected_tournament.numbers_of_rounds:
                     self.tournament_view.selected_tournament_is_over()
                 else:
-                    self.tournament_manager.play_tournament(selected_tournament)                  
+                    self.tournament_manager.play_tournament(selected_tournament)
             elif choice == "3":
                 self.display_main_menu()
             else:
-                print("Invalid choice, please try again.")
+                MenuView.invalid_choice()
 
     def display_player_menu(self):
         """Display the player menu and handle user choices."""
@@ -68,7 +68,7 @@ class ApplicationController:
             elif choice == "3":
                 self.display_main_menu()
             else:
-                print("Invalid choice, please try again.")
+                MenuView.invalid_choice()
 
     def display_reports_menu(self):
         """Display the reports menu and handle user choices."""
@@ -84,7 +84,7 @@ class ApplicationController:
                 if selected_tournament:
                     TournamentView.display_selected_tournament(selected_tournament)
                     PlayerView.display_players(selected_tournament.players_list)
-                    
+
                     # Load rounds from rounds.json file
                     all_rounds = Round.load_rounds_from_db()
                     rounds_for_tournament = [Round.from_dict_round(round_data)
@@ -94,4 +94,4 @@ class ApplicationController:
             elif choice == "3":
                 return
             else:
-                print("Invalid choice, please try again.")
+                MenuView.invalid_choice()

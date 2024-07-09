@@ -28,3 +28,6 @@ class MenuView:
     def user_choice():
         choice = input("\nEnter your choice: ")
         return choice
+
+    def invalid_choice():
+        print("Invalid choice, please try again.")

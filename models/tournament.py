@@ -102,8 +102,6 @@ class Tournament:
 
         os.replace(temp_file_path, json_file_path)
 
-        print(f"Tournament '{tournament['name']}' successfully saved.")
-
     @staticmethod
     def load_tournaments_from_db():
         json_file_path = "tournaments.json"
