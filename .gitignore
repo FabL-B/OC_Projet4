@@ -9,6 +9,3 @@ __pycache__
 # Ignore files
 /players.json
 /tournaments.json
-
-# Ignore flake8 reports
-/flake8_report
