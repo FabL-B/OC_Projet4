@@ -8,19 +8,19 @@ class PlayerView:
 
     @staticmethod
     def get_player_name():
-        """Ask user to enter the player name"""
+        """Ask user to enter the player name."""
         name = input("Enter the name of the player: ")
         return name
 
     @staticmethod
     def get_player_surname():
-        """Ask user to enter the player surname"""
+        """Ask user to enter the player surname."""
         surname = input("Enter the surname of the player: ")
         return surname
 
     @staticmethod
     def get_player_birth_date():
-        """Ask user to enter the player birth date"""
+        """Ask user to enter the player birth date."""
         while True:
             user_input = input("Enter the birth date of the player(YYYY-MM-DD): ")
             try:
@@ -31,7 +31,7 @@ class PlayerView:
 
     @staticmethod
     def get_player_chess_id():
-        """Ask user to enter the player chess ID"""
+        """Ask user to enter the player chess ID."""
         chess_id = input("Enter the Chess ID of the player: ")
         return chess_id
 
@@ -48,11 +48,25 @@ class PlayerView:
 
     @staticmethod
     def invalid_player_list():
+        """Inform user that the players list cannot be odd number."""
         print("The number of players is odd; you need one more.")
 
     @staticmethod
+    def invalid_choice():
+        """Display invalid choice error."""
+        print("Invalid choice. Please choose a number within the range.")
+
+    @staticmethod
     def invalid_input():
+        """Display invalid input error."""
         print("Invalid input. Please enter a number.")
+
+    @staticmethod
+    def select_player_from_db():
+        """Ask user to chose a player from a list."""
+        print("if the player is not in database enter '0': ")
+        choice = int(input("Enter the number of the player to add: ")) - 1
+        return choice
 
     def display_players(players_list):
         """Display a list of players."""

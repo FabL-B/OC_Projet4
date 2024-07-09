@@ -73,7 +73,7 @@ class TournamentView:
         while True:
             try:
                 choice = int(input(
-                    "Enter the number of the tournament to play: ")) - 1
+                    "Enter the number of the tournament to chose: ")) - 1
                 if 0 <= choice < len(tournaments_list):
                     break
                 else:

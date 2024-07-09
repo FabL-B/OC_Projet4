@@ -28,9 +28,11 @@ class TournamentManager:
 
         for i in range(selected_tournament.actual_round,
                        selected_tournament.numbers_of_rounds + 1):
+            # Set tournament actual_round to +1 before creating new round.
             selected_tournament.actual_round += 1
             new_round = self.round_manager.create_new_round(selected_tournament)
             self.tournament_view.display_starting_round(i+1)
+            # Play each matches of the round.
             for match in new_round.matches_list:
                 self.round_manager.enter_match_result(match)
             new_round.end_round()
@@ -38,6 +40,7 @@ class TournamentManager:
             selected_tournament.rounds_list.append(new_round)
             Tournament.save_tournament(selected_tournament)
 
+            # Check if tournament is over.
             if selected_tournament.actual_round == selected_tournament.numbers_of_rounds:
                 self.tournament_view.display_tournament_over(selected_tournament.name)
                 return

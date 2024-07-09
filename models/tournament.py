@@ -105,7 +105,9 @@ class Tournament:
     @staticmethod
     def load_tournaments_from_db():
         json_file_path = "tournaments.json"
+        tournaments_list = []
 
-        with open(json_file_path, "r") as file:
-            tournaments = json.load(file)
-        return tournaments
+        if os.path.exists(json_file_path):
+            with open(json_file_path, "r") as file:
+                tournaments_list = json.load(file)
+        return tournaments_list

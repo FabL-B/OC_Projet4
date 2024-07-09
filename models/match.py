@@ -23,6 +23,7 @@ class Match:
         """Convert a tuple of lists back into a Match object."""
         player1_dict, score1 = tuples_list[0]
         player2_dict, score2 = tuples_list[1]
+        # Convert both players to a Player object.
         player1 = Player.from_dict_player(player1_dict)
         player2 = Player.from_dict_player(player2_dict)
 
@@ -31,5 +32,5 @@ class Match:
         return match
 
     def get_players(self):
-        """Return a tuple of the players in the match."""
+        """Return a tuple of the players in the match to check previous matches from db."""
         return (self.player_scores[0][0], self.player_scores[1][0])

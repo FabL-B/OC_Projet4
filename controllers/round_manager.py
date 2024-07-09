@@ -51,18 +51,22 @@ class RoundManager:
 
     def avoid_previous_matchups(self, players_list, rounds_list):
         """Reorder the players list to avoid previous matchups."""
+        # From played rounds, get previous matches in a list.
         previous_matches = Round.get_previous_matches(rounds_list)
 
         i = 0
         while i < len(players_list) - 1:
             player1 = players_list[i]
             player2 = players_list[i + 1]
+            # Check if player1 and player2 already played against each other.
             if ((player1, player2) in previous_matches or
                     (player2, player1) in previous_matches):
-                # Try to find a new matchup for player1
+                # Try to find a new matchup for player1.
                 for j in range(i + 2, len(players_list)):
+                    # Check until it finds a proper player to face player1.
                     if ((player1, players_list[j]) not in previous_matches and
                             (players_list[j], player1) not in previous_matches):
+                        # Reorder players in the list to have new matchups.
                         players_list[i + 1], players_list[j] = players_list[j], players_list[i + 1]
                         break
                 else:
